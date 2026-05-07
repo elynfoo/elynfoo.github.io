@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elyn Foo | Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* NAV */
+    nav {
+      background: #1a1a2e;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo { color: #e94560; font-size: 22px; font-weight: bold; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav ul li a { color: #ccc; text-decoration: none; font-size: 15px; }
+    nav ul li a:hover { color: #e94560; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+      padding: 80px 40px;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .hero img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #e94560;
+    }
+    .hero-text h1 { font-size: 42px; }
+    .hero-text h1 span { color: #e94560; }
+    .hero-text p { color: #aaa; margin-top: 8px; font-size: 16px; }
+    .hero-text .contact { margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap; }
+    .hero-text .contact a {
+      color: #e94560;
+      text-decoration: none;
+      border: 1px solid #e94560;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .hero-text .contact a:hover { background: #e94560; color: white; }
+
+    /* SECTIONS */
+    section { padding: 60px 40px; }
+    section:nth-child(even) { background: white; }
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #1a1a2e;
+      border-left: 5px solid #e94560;
+      padding-left: 15px;
+    }
+
+    /* ABOUT */
+    .about p { font-size: 16px; line-height: 1.8; max-width: 800px; }
+
+    /* DIGITAL PRESENCE */
+    .presence-links { display: flex; gap: 15px; flex-wrap: wrap; }
+    .presence-links a {
+      background: #1a1a2e;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .presence-links a:hover { background: #e94560; }
+
+    /* EXPERIENCE */
+    .experience-item {
+      background: #f4f6f9;
+      border-left: 4px solid #e94560;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 0 8px 8px 0;
+    }
+    .experience-item h3 { color: #1a1a2e; font-size: 18px; }
+    .experience-item span { color: #e94560; font-size: 14px; }
+    .experience-item p { margin-top: 8px; color: #555; line-height: 1.6; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: #1a1a2e;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .skill-card h3 { color: #e94560; margin-bottom: 10px; }
+    .skill-card p { font-size: 14px; color: #aaa; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .project-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #eee;
+    }
+    .project-card .project-info { padding: 20px; }
+    .project-card h3 { color: #1a1a2e; font-size: 18px; }
+    .project-card p { color: #555; font-size: 14px; margin: 10px 0; line-height: 1.6; }
+    .project-card .lang-tag {
+      display: inline-block;
+      background: #e94560;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin: 3px 2px;
+    }
+    .project-links { display: flex; gap: 10px; margin-top: 15px; }
+    .project-links a {
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .project-links .btn-source { background: #1a1a2e; color: white; }
+    .project-links .btn-live { background: #e94560; color: white; }
+    .project-links a:hover { opacity: 0.85; }
+
+    /* CODE SAMPLE */
+    .code-block {
+      background: #1a1a2e;
+      color: #e2e8f0;
+      padding: 25px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .code-block .comment { color: #6a9955; }
+    .code-block .keyword { color: #569cd6; }
+    .code-block .string { color: #ce9178; }
+
+    /* FOOTER */
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      text-align: center;
+      padding: 30px;
+    }
+    footer a { color: #e94560; text-decoration: none; }
+    footer p { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Elyn Foo</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#presence">Digital Presence</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#code">Code Sample</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="photo.jpg" alt="Elyn Foo" onerror="this.src='https://via.placeholder.com/150'"/>
+    <div class="hero-text">
+      <h1>Hi, I'm <span>Elyn Foo</span></h1>
+      <p>Junior Cloud & DevOps Engineer | Singapore</p>
+      <div class="contact">
+        <a href="mailto:elynf@genstudents.org">elynf@genstudents.org</a>
+        <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143">LinkedIn</a>
+        <a href="#presence">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT ME -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+      I am a motivated Junior Cloud & DevOps Engineer with hands-on experience in containerizing
+      applications using Docker, deploying to Kubernetes clusters, and building CI/CD pipelines
+      with Azure DevOps. I am passionate about automating workflows and deploying scalable,
+      reliable applications in cloud environments. I am actively seeking opportunities to grow
+      in a DevOps or Cloud Engineering role where I can contribute to modern software delivery practices.
+    </p>
+  </section>
+
+  <!-- DIGITAL PRESENCE -->
+  <section id="presence">
+    <h2>Digital Presence</h2>
+    <div class="presence-links">
+      <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143" target="_blank">LinkedIn</a>
+      <a href="https://github.com/elynfoo" target="_blank">GitHub</a>
+      <a href="https://hub.docker.com/u/elynfoo" target="_blank">Docker Hub</a>
+      <a href="https://dev.azure.com/ElynF" target="_blank">Azure DevOps</a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <div class="experience-item">
+      <h3>Junior Cloud & DevOps Engineer (Trainee)</h3>
+      <span>Generation Singapore — 2026</span>
+      <p>
+        Completed an intensive bootcamp covering Python, Flask, Docker, Kubernetes, and Azure DevOps.
+        Built and deployed containerized web applications, provisioned Kubernetes clusters, and
+        implemented CI/CD pipelines. Earned Cloud and Devops Certification from Generation SG | Temasek Polytechnic.
+      </p>
+    </div>
+
+    <div class="experience-item">
+      <h3>Flask Web Developer (Personal Projects)</h3>
+      <span>2025 – Present</span>
+      <p>
+        Developed multiple Flask web applications including a blog platform, e-commerce site,
+        and personal portfolio. Migrated databases from SQLite to PostgreSQL and containerized
+        applications with Docker and Docker Compose.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Cloud & DevOps</h3>
+        <p>Docker, Kubernetes, Azure DevOps, CI/CD Pipelines, Minikube</p>
+      </div>
+      <div class="skill-card">
+        <h3>Backend Development</h3>
+        <p>Python, Flask, SQLAlchemy, PostgreSQL, REST APIs</p>
+      </div>
+      <div class="skill-card">
+        <h3>Infrastructure</h3>
+        <p>Linux, Git, Azure Repos, Docker Hub, Kubernetes Manifests</p>
+      </div>
+      <div class="skill-card">
+        <h3>Soft Skills</h3>
+        <p>Problem Solving, Self-Learning, Attention to Detail, Team Collaboration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div style="height:180px;background:linear-gradient(135deg,#1a1a2e,#e94560);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">🐳</div>
+        <div class="project-info">
+          <h3>Containerized Flask Portfolio</h3>
+          <p>A multi-app Flask project containerized with Docker and deployed to Kubernetes with a full CI/CD pipeline via Azure DevOps.</p>
+          <span class="lang-tag">Python</span>
+          <span class="lang-tag">Docker</span>
+          <span class="lang-tag">Kubernetes</span>
+          <span class="lang-tag">PostgreSQL</span>
+          <div class="project-links">
+            <a href="https://dev.azure.com/ElynF/CSD07/_git/CSD07" class="btn-source" target="_blank">Source Code</a>
+            <a href="http://localhost:5000" class="btn-live" target="_blank">Live App</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div style="height:180px;background:linear-gradient(135deg,#16213e,#0f3460);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">🛒</div>
+        <div class="project-info">
+          <h3>Flask E-Commerce App</h3>
+          <p>An e-commerce web app with product listing, cart management, customer checkout, and order confirmation built with Flask and SQLAlchemy.</p>
+          <span class="lang-tag">Python</span>
+          <span class="lang-tag">Flask</span>
+          <span class="lang-tag">PostgreSQL</span>
+          <div class="project-links">
+            <a href="https://dev.azure.com/ElynF/CSD07/_git/CSD07" class="btn-source" target="_blank">Source Code</a>
+            <a href="http://localhost:5000/ecommerce" class="btn-live" target="_blank">Live App</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div style="height:180px;background:linear-gradient(135deg,#0f3460,#533483);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">💬</div>
+        <div class="project-info">
+          <h3>Flask Comment Blog</h3>
+          <p>A blog platform with user authentication using Flask-Login, comment posting, and role-based access control stored in PostgreSQL.</p>
+          <span class="lang-tag">Python</span>
+          <span class="lang-tag">Flask-Login</span>
+          <span class="lang-tag">PostgreSQL</span>
+          <div class="project-links">
+            <a href="https://dev.azure.com/ElynF/CSD07/_git/CSD07" class="btn-source" target="_blank">Source Code</a>
+            <a href="http://localhost:5000/flaskwebsite" class="btn-live" target="_blank">Live App</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CODE SAMPLE -->
+  <section id="code">
+    <h2>Code Sample</h2>
+    <p style="margin-bottom:15px;color:#555;">CI/CD Pipeline — azure-pipelines.yml (automatically builds and deploys on every code push)</p>
+    <div class="code-block">
+<span class="comment"># Azure DevOps CI/CD Pipeline</span>
+<span class="keyword">trigger</span>:
+  branches:
+    include: [main, feature/*]
+
+<span class="keyword">pool</span>:
+  name: Default
+
+<span class="keyword">stages</span>:
+  - stage: Build
+    jobs:
+      - job: BuildPush
+        steps:
+          - script: |
+              docker login -u <span class="string">"$(DOCKER_USERNAME)"</span> --password <span class="string">"$(DOCKER_PASSWORD)"</span>
+              docker build -t elynfoo/devops-flaskapp:$(Build.BuildId) .
+              docker push elynfoo/devops-flaskapp:$(Build.BuildId)
+
+  - stage: Deploy
+    dependsOn: Build
+    jobs:
+      - job: Deploy
+        steps:
+          - script: |
+              kubectl set image deployment/flask-portfolio \
+                flask-portfolio=elynfoo/devops-flaskapp:$(Build.BuildId)
+              kubectl rollout status deployment/flask-portfolio
+    </div>
+  </section>
+
+  <!-- FOOTER / ABOUT ME -->
+  <footer>
+    <p><strong style="color:white;">Elyn Foo</strong></p>
+    <p>GitHub: <a href="https://github.com/elynfoo" target="_blank">github.com/elynfoo</a></p>
+    <p>Contributors: Elyn Foo</p>
+    <p>Languages used: Python, HTML, CSS, YAML</p>
+    <p style="margin-top:15px;font-size:13px;">© 2026 Elyn Foo. Built with Flask & Deployed on Kubernetes.</p>
+  </footer>
+
+</body>
+</html>
