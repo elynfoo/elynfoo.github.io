@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-portfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-portfolio
+  template:
+    metadata:
+      labels:
+        app: flask-portfolio
+    spec:
+      containers:
+        - name: flask-portfolio
+          image: elynfoo/devops-flaskapp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: development
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: flask-db-secret
+                  key: DATABASE_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  selector:
+    app: flask-portfolio
+  ports:
+    - port: 5000
+      targetPort: 5000
+  type: LoadBalancer
