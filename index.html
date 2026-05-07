@@ -24,10 +24,10 @@
       top: 0;
       z-index: 100;
     }
-    nav .logo { color: #e94560; font-size: 22px; font-weight: bold; }
+    nav .logo { color: #28a745; font-size: 22px; font-weight: bold; }
     nav ul { list-style: none; display: flex; gap: 25px; }
     nav ul li a { color: #ccc; text-decoration: none; font-size: 15px; }
-    nav ul li a:hover { color: #e94560; }
+    nav ul li a:hover { color: #28a745; }
 
     /* HERO */
     .hero {
@@ -43,21 +43,21 @@
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #e94560;
+      border: 4px solid #28a745;
     }
     .hero-text h1 { font-size: 42px; }
-    .hero-text h1 span { color: #e94560; }
+    .hero-text h1 span { color: #28a745; }
     .hero-text p { color: #aaa; margin-top: 8px; font-size: 16px; }
     .hero-text .contact { margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap; }
     .hero-text .contact a {
-      color: #e94560;
+      color: #28a745;
       text-decoration: none;
-      border: 1px solid #e94560;
+      border: 1px solid #28a745;
       padding: 6px 14px;
       border-radius: 20px;
       font-size: 14px;
     }
-    .hero-text .contact a:hover { background: #e94560; color: white; }
+    .hero-text .contact a:hover { background: #28a745; color: white; }
 
     /* SECTIONS */
     section { padding: 60px 40px; }
@@ -66,7 +66,7 @@
       font-size: 28px;
       margin-bottom: 30px;
       color: #1a1a2e;
-      border-left: 5px solid #e94560;
+      border-left: 5px solid #28a745;
       padding-left: 15px;
     }
 
@@ -83,18 +83,18 @@
       text-decoration: none;
       font-size: 15px;
     }
-    .presence-links a:hover { background: #e94560; }
+    .presence-links a:hover { background: #28a745; }
 
     /* EXPERIENCE */
     .experience-item {
       background: #f4f6f9;
-      border-left: 4px solid #e94560;
+      border-left: 4px solid #28a745;
       padding: 20px;
       margin-bottom: 20px;
       border-radius: 0 8px 8px 0;
     }
     .experience-item h3 { color: #1a1a2e; font-size: 18px; }
-    .experience-item span { color: #e94560; font-size: 14px; }
+    .experience-item span { color: #28a745; font-size: 14px; }
     .experience-item p { margin-top: 8px; color: #555; line-height: 1.6; }
 
     /* SKILLS */
@@ -110,7 +110,7 @@
       border-radius: 8px;
       text-align: center;
     }
-    .skill-card h3 { color: #e94560; margin-bottom: 10px; }
+    .skill-card h3 { color: #28a745; margin-bottom: 10px; }
     .skill-card p { font-size: 14px; color: #aaa; }
 
     /* PROJECTS */
@@ -136,7 +136,7 @@
     .project-card p { color: #555; font-size: 14px; margin: 10px 0; line-height: 1.6; }
     .project-card .lang-tag {
       display: inline-block;
-      background: #e94560;
+      background: #28a745;
       color: white;
       padding: 3px 10px;
       border-radius: 12px;
@@ -152,7 +152,7 @@
       font-weight: bold;
     }
     .project-links .btn-source { background: #1a1a2e; color: white; }
-    .project-links .btn-live { background: #e94560; color: white; }
+    .project-links .btn-live { background: #28a745; color: white; }
     .project-links a:hover { opacity: 0.85; }
 
     /* CODE SAMPLE */
@@ -177,7 +177,7 @@
       text-align: center;
       padding: 30px;
     }
-    footer a { color: #e94560; text-decoration: none; }
+    footer a { color: #28a745; text-decoration: none; }
     footer p { margin: 5px 0; }
   </style>
 </head>
@@ -243,7 +243,7 @@
       <p>
         Completed an intensive bootcamp covering Python, Flask, Docker, Kubernetes, and Azure DevOps.
         Built and deployed containerized web applications, provisioned Kubernetes clusters, and
-        implemented CI/CD pipelines. Earned Cloud and Devops Certification from Generation SG | Temasek Polytechnic.
+        implemented CI/CD pipelines. Earned Cloud and Devops Certification from, Generation SG | Temasek Polytechnic.
       </p>
     </div>
 
@@ -287,7 +287,7 @@
     <div class="projects-grid">
 
       <div class="project-card">
-        <div style="height:180px;background:linear-gradient(135deg,#1a1a2e,#e94560);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">🐳</div>
+        <div style="height:180px;background:linear-gradient(135deg,#1a1a2e,#28a745);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">🐳</div>
         <div class="project-info">
           <h3>Containerized Flask Portfolio</h3>
           <p>A multi-app Flask project containerized with Docker and deployed to Kubernetes with a full CI/CD pipeline via Azure DevOps.</p>
@@ -334,41 +334,7 @@
 
     </div>
   </section>
-
-  <!-- CODE SAMPLE -->
-  <section id="code">
-    <h2>Code Sample</h2>
-    <p style="margin-bottom:15px;color:#555;">CI/CD Pipeline — azure-pipelines.yml (automatically builds and deploys on every code push)</p>
-    <div class="code-block">
-<span class="comment"># Azure DevOps CI/CD Pipeline</span>
-<span class="keyword">trigger</span>:
-  branches:
-    include: [main, feature/*]
-
-<span class="keyword">pool</span>:
-  name: Default
-
-<span class="keyword">stages</span>:
-  - stage: Build
-    jobs:
-      - job: BuildPush
-        steps:
-          - script: |
-              docker login -u <span class="string">"$(DOCKER_USERNAME)"</span> --password <span class="string">"$(DOCKER_PASSWORD)"</span>
-              docker build -t elynfoo/devops-flaskapp:$(Build.BuildId) .
-              docker push elynfoo/devops-flaskapp:$(Build.BuildId)
-
-  - stage: Deploy
-    dependsOn: Build
-    jobs:
-      - job: Deploy
-        steps:
-          - script: |
-              kubectl set image deployment/flask-portfolio \
-                flask-portfolio=elynfoo/devops-flaskapp:$(Build.BuildId)
-              kubectl rollout status deployment/flask-portfolio
-    </div>
-  </section>
+ 
 
   <!-- FOOTER / ABOUT ME -->
   <footer>
