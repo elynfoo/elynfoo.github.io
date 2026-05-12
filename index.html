@@ -153,7 +153,46 @@
     }
     .project-links .btn-source { background: #1a1a2e; color: white; }
     .project-links .btn-live { background: #28a745; color: white; }
+    .project-links .btn-workflow { background: #0f3460; color: white; }
     .project-links a:hover { opacity: 0.85; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #1a1a2e;
+      color: #e2e8f0;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 520px;
+      width: 90%;
+      position: relative;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 2;
+    }
+    .modal h3 { color: #28a745; margin-bottom: 15px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .modal .close-btn {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .modal .close-btn:hover { color: white; }
+    .modal .step { color: #28a745; }
+    .modal .arrow { color: #569cd6; display: block; text-align: center; }
 
     /* CODE SAMPLE */
     .code-block {
@@ -343,7 +382,25 @@
           <span class="lang-tag">Python</span>
           <div class="project-links">
             <a href="https://github.com/elynfoo/ansible-terraform" class="btn-source" target="_blank">Source Code</a>
+            <a href="#" class="btn-workflow" onclick="document.getElementById('workflow-modal').classList.add('active'); return false;">Workflow</a>
             <a href="http://40.90.189.161:5001" class="btn-live" target="_blank">Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div style="height:180px;background:linear-gradient(135deg,#0d0d0d,#00ff00,#0d0d0d);display:flex;align-items:center;justify-content:center;color:#00ff00;font-size:40px;font-family:'Courier New',monospace;">&#128225;</div>
+        <div class="project-info">
+          <h3>Web Network Scanner</h3>
+          <p>A self-hosted network monitoring dashboard running on Linux (WSL2/Ubuntu). Nmap scans the local network every 5 minutes via cron and results are displayed in a live browser dashboard served by Apache and PHP.</p>
+          <span class="lang-tag">Bash</span>
+          <span class="lang-tag">PHP</span>
+          <span class="lang-tag">Apache</span>
+          <span class="lang-tag">Nmap</span>
+          <span class="lang-tag">Linux</span>
+          <div class="project-links">
+            <a href="https://github.com/elynfoo/web-scanner" class="btn-source" target="_blank">Source Code</a>
+            <a href="#" class="btn-workflow" onclick="document.getElementById('scanner-workflow-modal').classList.add('active'); return false;">Workflow</a>
           </div>
         </div>
       </div>
@@ -360,6 +417,58 @@
     <p>Languages used: Python, HTML, CSS, YAML</p>
     <p style="margin-top:15px;font-size:13px;">© 2026 Elyn Foo. Built with Flask & Deployed on Kubernetes.</p>
   </footer>
+
+<!-- WORKFLOW MODAL -->
+<div class="modal-overlay" id="workflow-modal" onclick="if(event.target===this) this.classList.remove('active')">
+  <div class="modal">
+    <button class="close-btn" onclick="document.getElementById('workflow-modal').classList.remove('active')">✕</button>
+    <h3>Terraform + Ansible Workflow</h3>
+    <span class="step">1. Terraform</span>
+    <span>   Reads main.tf → provisions Azure VM</span>
+    <span>   (Resource Group, VNet, NSG, Public IP, NIC, VM)</span>
+    <span class="arrow">↓</span>
+    <span class="step">2. Ansible</span>
+    <span>   SSHs into VM using private key</span>
+    <span>   Installs Python, pip, Flask</span>
+    <span>   Creates app.py + systemd service</span>
+    <span>   Starts &amp; enables Flask on boot</span>
+    <span class="arrow">↓</span>
+    <span class="step">3. Flask App (on VM)</span>
+    <span>   Runs at http://&lt;VM-IP&gt;:5000</span>
+    <span>   Returns: Hello from Ansible + Terraform!</span>
+    <span class="arrow">↓</span>
+    <span class="step">4. Live Demo (containerized)</span>
+    <span>   Same app → Dockerfile → Docker Hub</span>
+    <span>   Deployed to AKS → http://40.90.189.161:5001</span>
+  </div>
+</div>
+
+<!-- SCANNER WORKFLOW MODAL -->
+<div class="modal-overlay" id="scanner-workflow-modal" onclick="if(event.target===this) this.classList.remove('active')">
+  <div class="modal">
+    <button class="close-btn" onclick="document.getElementById('scanner-workflow-modal').classList.remove('active')">&#x2715;</button>
+    <h3>Web Network Scanner Workflow</h3>
+    <span class="step">1. Cron Job (every 5 minutes)</span>
+    <span>   */5 * * * * /usr/local/bin/network_scan.sh</span>
+    <span>   Triggers the scan script automatically</span>
+    <span class="arrow">&#8595;</span>
+    <span class="step">2. network_scan.sh (Bash)</span>
+    <span>   Checks lock file → prevents overlapping runs</span>
+    <span>   Runs: nmap -sV --open &lt;network-range&gt;</span>
+    <span>   Writes results to /var/www/scans/output.txt</span>
+    <span class="arrow">&#8595;</span>
+    <span class="step">3. Apache2 + PHP</span>
+    <span>   Browser requests http://&lt;ip&gt;/network.php</span>
+    <span>   .htaccess enforces basic auth login</span>
+    <span>   PHP reads output.txt safely (outside web root)</span>
+    <span>   htmlspecialchars() prevents XSS</span>
+    <span class="arrow">&#8595;</span>
+    <span class="step">4. Browser Dashboard</span>
+    <span>   Displays live hosts, open ports, services</span>
+    <span>   Auto-refreshes every 60 seconds</span>
+    <span>   File permissions: 775 (no chmod 777)</span>
+  </div>
+</div>
 
 </body>
 </html>
