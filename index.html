@@ -2,530 +2,814 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Elyn Foo | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elyn Foo | Junior Cloud & DevOps Engineer</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f4f6f9;
-      color: #333;
+    :root {
+      --dev-plan:   #e74c3c;
+      --dev-code:   #3498db;
+      --dev-build:  #2c3e7a;
+      --dev-test:   #5dade2;
+      --ops-release:#f39c12;
+      --ops-deploy: #e74c3c;
+      --ops-operate:#f39c12;
+      --ops-monitor:#2c3e7a;
+      --bg:         #0d1117;
+      --surface:    #161b22;
+      --border:     #30363d;
+      --text:       #e6edf3;
+      --muted:      #8b949e;
+      --accent:     #58a6ff;
     }
 
-    /* NAV */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
     nav {
-      background: #1a1a2e;
-      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      z-index: 200;
+      height: 56px;
     }
-    nav .logo { color: #28a745; font-size: 22px; font-weight: bold; }
-    nav ul { list-style: none; display: flex; gap: 25px; }
-    nav ul li a { color: #ccc; text-decoration: none; font-size: 15px; }
-    nav ul li a:hover { color: #28a745; }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: white;
-      padding: 80px 40px;
+    .logo { font-weight: 800; font-size: 1rem; color: var(--accent); letter-spacing: 0.02em; }
+    .nav-stages {
       display: flex;
+      list-style: none;
+      gap: 0;
+    }
+    .nav-stages li a {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 50px;
+      padding: 8px 14px;
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      line-height: 1.3;
     }
-    .hero img {
-      width: 150px;
-      height: 150px;
+    .nav-stages li a:hover { color: var(--text); border-bottom-color: var(--accent); }
+    .nav-stages li a .dot {
+      width: 7px; height: 7px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #28a745;
+      margin-bottom: 3px;
     }
-    .hero-text h1 { font-size: 42px; }
-    .hero-text h1 span { color: #28a745; }
-    .hero-text p { color: #aaa; margin-top: 8px; font-size: 16px; }
-    .hero-text .contact { margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap; }
-    .hero-text .contact a {
-      color: #28a745;
-      text-decoration: none;
-      border: 1px solid #28a745;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 14px;
-    }
-    .hero-text .contact a:hover { background: #28a745; color: white; }
+    /* stage colours */
+    .s-plan   .dot { background: var(--dev-plan); }
+    .s-code   .dot { background: var(--dev-code); }
+    .s-build  .dot { background: var(--dev-build); }
+    .s-test   .dot { background: var(--dev-test); }
+    .s-release .dot { background: var(--ops-release); }
+    .s-deploy .dot { background: var(--ops-deploy); }
+    .s-operate .dot { background: var(--ops-operate); }
+    .s-monitor .dot { background: var(--ops-monitor); }
 
-    /* SECTIONS */
-    section { padding: 60px 40px; }
-    section:nth-child(even) { background: white; }
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 30px;
-      color: #1a1a2e;
-      border-left: 5px solid #28a745;
-      padding-left: 15px;
+    .nav-divider {
+      width: 1px; background: var(--border);
+      align-self: stretch; margin: 10px 4px;
     }
 
-    /* ABOUT */
-    .about p { font-size: 16px; line-height: 1.8; max-width: 800px; }
-
-    /* DIGITAL PRESENCE */
-    .presence-links { display: flex; gap: 15px; flex-wrap: wrap; }
-    .presence-links a {
-      background: #1a1a2e;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 15px;
-    }
-    .presence-links a:hover { background: #28a745; }
-
-    /* EXPERIENCE */
-    .experience-item {
-      background: #f4f6f9;
-      border-left: 4px solid #28a745;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 0 8px 8px 0;
-    }
-    .experience-item h3 { color: #1a1a2e; font-size: 18px; }
-    .experience-item span { color: #28a745; font-size: 14px; }
-    .experience-item p { margin-top: 8px; color: #555; line-height: 1.6; }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-    .skill-card {
-      background: #1a1a2e;
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .skill-card h3 { color: #28a745; margin-bottom: 10px; }
-    .skill-card p { font-size: 14px; color: #aaa; }
-
-    /* PROJECTS */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-    .project-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      background: #eee;
-    }
-    .project-card .project-info { padding: 20px; }
-    .project-card h3 { color: #1a1a2e; font-size: 18px; }
-    .project-card p { color: #555; font-size: 14px; margin: 10px 0; line-height: 1.6; }
-    .project-card .lang-tag {
-      display: inline-block;
-      background: #28a745;
-      color: white;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      margin: 3px 2px;
-    }
-    .project-links { display: flex; gap: 10px; margin-top: 15px; }
-    .project-links a {
-      padding: 8px 16px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
-    .project-links .btn-source { background: #1a1a2e; color: white; }
-    .project-links .btn-live { background: #28a745; color: white; }
-    .project-links .btn-workflow { background: #0f3460; color: white; }
-    .project-links a:hover { opacity: 0.85; }
-
-    /* MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      z-index: 999;
+    /* ── HERO ── */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-    }
-    .modal-overlay.active { display: flex; }
-    .modal {
-      background: #1a1a2e;
-      color: #e2e8f0;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 520px;
-      width: 90%;
+      text-align: center;
+      padding: 60px 20px;
+      background: radial-gradient(ellipse at 30% 50%, #1f6feb18 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, #f3901218 0%, transparent 60%),
+                  var(--bg);
       position: relative;
-      font-family: 'Courier New', monospace;
-      font-size: 14px;
-      line-height: 2;
+      overflow: hidden;
     }
-    .modal h3 { color: #28a745; margin-bottom: 15px; font-family: 'Segoe UI', Arial, sans-serif; }
-    .modal .close-btn {
-      position: absolute;
-      top: 12px; right: 16px;
-      background: none;
-      border: none;
-      color: #aaa;
-      font-size: 20px;
+    .hero-eyebrow {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 36px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: 11px 26px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
       cursor: pointer;
     }
-    .modal .close-btn:hover { color: white; }
-    .modal .step { color: #28a745; }
-    .modal .arrow { color: #569cd6; display: block; text-align: center; }
+    .btn-green  { background: #238636; color: #fff; border: 1px solid #2ea043; }
+    .btn-green:hover { background: #2ea043; }
+    .btn-ghost  { background: transparent; color: var(--accent); border: 1.5px solid rgba(88,166,255,0.6); }
+    .btn-ghost:hover { background: #58a6ff18; border-color: var(--accent); }
 
-    /* CODE SAMPLE */
-    .code-block {
-      background: #1a1a2e;
-      color: #e2e8f0;
-      padding: 25px;
+
+    /* ── SCROLL CUE ── */
+    .scroll-cue {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      opacity: 0.45;
+      animation: scroll-bounce 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .scroll-cue svg { display: block; }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ── STAGE PIPELINE ROW ── */
+    .stage-row {
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      overflow-x: auto;
-      font-family: 'Courier New', monospace;
-      font-size: 14px;
-      line-height: 1.7;
+      padding: 14px 24px;
+      gap: 0;
     }
-    .code-block .comment { color: #6a9955; }
-    .code-block .keyword { color: #569cd6; }
-    .code-block .string { color: #ce9178; }
+    .stage-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 18px;
+    }
+    .stage-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .stage-name {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .stage-sep {
+      width: 1px;
+      height: 38px;
+      background: var(--border);
+      margin: 0 6px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) { .stage-row { display: none; } }
+    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
 
-    /* FOOTER */
-    footer {
-      background: #1a1a2e;
-      color: #aaa;
-      text-align: center;
-      padding: 30px;
+    /* ── STAGE SECTION ── */
+    .stage-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      border-bottom: 1px solid #21262d;
     }
-    footer a { color: #28a745; text-decoration: none; }
-    footer p { margin: 5px 0; }
+    .stage-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stage-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 10px;
+      border-radius: 24px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .stage-badge .num {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+    }
+    .stage-title { font-size: 1.8rem; font-weight: 700; color: var(--text); }
+    .stage-intro { color: var(--muted); max-width: 680px; margin-bottom: 28px; font-size: 0.95rem; }
+    p.body-text { color: var(--muted); margin-bottom: 14px; }
+    p.body-text strong { color: var(--text); }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+    }
+    .card h3 { color: var(--text); font-size: 1rem; margin-bottom: 8px; }
+    .card h4 { color: var(--text); font-size: 0.92rem; margin-bottom: 6px; }
+    .card p  { color: var(--muted); font-size: 0.875rem; margin-bottom: 0; }
+    .card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+
+    /* ── STORY CARD (featured) ── */
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .story-card .side-bar {
+      position: absolute;
+      left: 0; top: 0;
+      width: 4px; height: 100%;
+    }
+    .story-row { margin-bottom: 18px; }
+    .story-row-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .story-row p { font-size: 0.875rem; color: var(--muted); margin: 0; }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+    .tag {
+      background: #21262d;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── SKILL PILLS ── */
+    .skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .skill-pill {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    /* ── CLOSING ── */
+    .closing-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 52px 40px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .closing-box blockquote {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+    .closing-box .lesson {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto 30px;
+    }
+
+    /* ── PRESENCE ── */
+    .presence-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .presence-link {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 20px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .presence-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--border);
+      font-size: 0.82rem;
+      border-top: 1px solid #21262d;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .nav-stages { display: none; }
+      .stage-title { font-size: 1.3rem; }
+      .closing-box { padding: 32px 20px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="logo">Elyn Foo</div>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#presence">Digital Presence</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#code">Architecture</a></li>
-    </ul>
-  </nav>
+<!-- ══════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════ -->
+<nav>
+  <span class="logo">Elyn Foo</span>
+  <ul class="nav-stages">
+    <li class="s-plan">  <a href="#plan">  <span class="dot"></span>Plan</a></li>
+    <li class="s-code">  <a href="#code">  <span class="dot"></span>Code</a></li>
+    <li class="s-build"> <a href="#build"> <span class="dot"></span>Build</a></li>
+    <li class="s-test">  <a href="#test">  <span class="dot"></span>Test</a></li>
+    <span class="nav-divider"></span>
+    <li class="s-release"><a href="#release"><span class="dot"></span>Release</a></li>
+    <li class="s-deploy"> <a href="#deploy"> <span class="dot"></span>Deploy</a></li>
+    <li class="s-operate"><a href="#operate"><span class="dot"></span>Operate</a></li>
+    <li class="s-monitor"><a href="#monitor"><span class="dot"></span>Monitor</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <img src="static/photo.jpg" alt="Elyn Foo" onerror="this.src='https://via.placeholder.com/150'"/>
-    <div class="hero-text">
-      <h1>Hi, I'm <span>Elyn Foo</span></h1>
-      <p>Junior Cloud & DevOps Engineer | Singapore</p>
-      <div class="contact">
-        <a href="mailto:elynf@genstudents.org">elynf@genstudents.org</a>
-        <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143">LinkedIn</a>
-        <a href="#presence">GitHub</a>
-      </div>
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<div class="hero">
+
+  <!-- Central content -->
+  <div class="hero-content">
+    <p class="hero-eyebrow">Junior Cloud &amp; DevOps Engineer &nbsp;·&nbsp; Singapore</p>
+    <h1>What if deploying an app<br />could take <em>minutes, not days?</em></h1>
+    <p class="hero-sub">
+      I asked that question during my first week of training — then spent six months
+      building the answer: automated pipelines, containerised apps, and infrastructure as code.
+      Scroll down to see how I work.
+    </p>
+    <div class="hero-cta">
+      <a href="#plan" class="btn btn-green">See My Work</a>
+      <a href="mailto:elynf@genstudents.org" class="btn btn-ghost">Get in Touch</a>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-plan)"></span><span class="stage-name">Plan</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-code)"></span><span class="stage-name">Code</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-build)"></span><span class="stage-name">Build</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-test)"></span><span class="stage-name">Test</span></div>
+      <div class="stage-sep"></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-release)"></span><span class="stage-name">Release</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-deploy)"></span><span class="stage-name">Deploy</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-operate)"></span><span class="stage-name">Operate</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-monitor)"></span><span class="stage-name">Monitor</span></div>
     </div>
   </div>
 
-  <!-- ABOUT ME -->
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <p>
-      I am a motivated Junior Cloud & DevOps Engineer with hands-on experience in containerizing
-      applications using Docker, deploying to Kubernetes clusters, and building CI/CD pipelines
-      with Azure DevOps. I am passionate about automating workflows and deploying scalable,
-      reliable applications in cloud environments. I am actively seeking opportunities to grow
-      in a DevOps or Cloud Engineering role where I can contribute to modern software delivery practices.
-    </p>
-  </section>
-
-  <!-- DIGITAL PRESENCE -->
-  <section id="presence">
-    <h2>Digital Presence</h2>
-    <div class="presence-links">
-      <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143" target="_blank">LinkedIn</a>
-      <a href="https://github.com/elynfoo" target="_blank">GitHub</a>
-      <a href="https://hub.docker.com/u/elynfoo" target="_blank">Docker Hub</a>
-      <a href="https://dev.azure.com/ElynF" target="_blank">Azure DevOps</a>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <h2>Experience</h2>
-
-    <div class="experience-item">
-      <h3>Junior Cloud & DevOps Engineer (Trainee)</h3>
-      <span>Generation Singapore — 2026</span>
-      <p>
-        Completed an intensive bootcamp covering Python, Flask, Docker, Kubernetes, and Azure DevOps.
-        Built and deployed containerized web applications, provisioned Kubernetes clusters, and
-        implemented CI/CD pipelines. Earned Cloud and Devops Certification from, Generation SG | Temasek Polytechnic.
-      </p>
-    </div>
-
-    <div class="experience-item">
-      <h3>Flask Web Developer (Personal Projects)</h3>
-      <span>2025 – Present</span>
-      <p>
-        Developed multiple Flask web applications including a blog platform, e-commerce site,
-        and personal portfolio. Migrated databases from SQLite to PostgreSQL and containerized
-        applications with Docker and Docker Compose.
-      </p>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h3>Cloud & DevOps</h3>
-        <p>Docker, Kubernetes, Azure DevOps, CI/CD Pipelines, Minikube</p>
-      </div>
-      <div class="skill-card">
-        <h3>Backend Development</h3>
-        <p>Python, Flask, SQLAlchemy, PostgreSQL, REST APIs</p>
-      </div>
-      <div class="skill-card">
-        <h3>Infrastructure</h3>
-        <p>Linux, Git, Azure Repos, Github Actions, Docker Hub, Kubernetes Manifests, Terraform, Ansible</p>
-      </div>
-      <div class="skill-card">
-        <h3>Soft Skills</h3>
-        <p>Problem Solving, Self-Learning, Attention to Detail, Team Collaboration</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div style="height:180px;background:linear-gradient(135deg,#1a1a2e,#28a745);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">🐳</div>
-        <div class="project-info">
-          <h3>Containerized Flask Portfolio</h3>
-          <p>A multi-app Flask project containerized with Docker and deployed to Kubernetes with a full CI/CD pipeline via Azure DevOps.</p>
-          <span class="lang-tag">Python</span>
-          <span class="lang-tag">Docker</span>
-          <span class="lang-tag">Kubernetes</span>
-          <span class="lang-tag">PostgreSQL</span>
-          <div class="project-links">
-            <a href="https://dev.azure.com/ElynF/CSD07/_git/Flask-PythonAnywhere" class="btn-source" target="_blank">Source Code</a>
-            <a href="http://40.90.189.161:5000" class="btn-live" target="_blank">Live App</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div style="height:180px;background:linear-gradient(135deg,#16213e,#0f3460);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">🛒</div>
-        <div class="project-info">
-          <h3>Flask E-Commerce App</h3>
-          <p>An e-commerce web app with product listing, cart management, customer checkout, and order confirmation built with Flask and SQLAlchemy.</p>
-          <span class="lang-tag">Python</span>
-          <span class="lang-tag">Flask</span>
-          <span class="lang-tag">PostgreSQL</span>
-          <div class="project-links">
-            <a href="https://dev.azure.com/ElynF/CSD07/_git/Flask-PythonAnywhere" class="btn-source" target="_blank">Source Code</a>
-            <a href="http://40.90.189.161:5000/ecommerce" class="btn-live" target="_blank">Live App</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div style="height:180px;background:linear-gradient(135deg,#0f3460,#533483);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">💬</div>
-        <div class="project-info">
-          <h3>Flask Comment Blog</h3>
-          <p>A blog platform with user authentication using Flask-Login, comment posting, and role-based access control stored in PostgreSQL.</p>
-          <span class="lang-tag">Python</span>
-          <span class="lang-tag">Flask-Login</span>
-          <span class="lang-tag">PostgreSQL</span>
-          <div class="project-links">
-            <a href="https://dev.azure.com/ElynF/CSD07/_git/Flask-PythonAnywhere" class="btn-source" target="_blank">Source Code</a>
-            <a href="http://40.90.189.161:5000/flaskwebsite" class="btn-live" target="_blank">Live App</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div style="height:180px;background:linear-gradient(135deg,#1a1a2e,#e94560);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;">⚙️</div>
-        <div class="project-info">
-          <h3>Terraform + Ansible VM Deployment</h3>
-          <p>Provisioned an Azure Ubuntu VM using Terraform and configured it with Ansible to automatically install and run a Flask app as a systemd service. Live demo runs the same app containerized on Kubernetes.</p>
-          <span class="lang-tag">Terraform</span>
-          <span class="lang-tag">Ansible</span>
-          <span class="lang-tag">Azure</span>
-          <span class="lang-tag">Python</span>
-          <div class="project-links">
-            <a href="https://github.com/elynfoo/ansible-terraform" class="btn-source" target="_blank">Source Code</a>
-            <a href="#" class="btn-workflow" onclick="document.getElementById('workflow-modal').classList.add('active'); return false;">Workflow</a>
-            <a href="http://40.90.189.161:5001" class="btn-live" target="_blank">Live Demo</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div style="height:180px;background:linear-gradient(135deg,#0d0d0d,#00ff00,#0d0d0d);display:flex;align-items:center;justify-content:center;color:#00ff00;font-size:40px;font-family:'Courier New',monospace;">&#128225;</div>
-        <div class="project-info">
-          <h3>Web Network Scanner</h3>
-          <p>A self-hosted network monitoring dashboard running on Linux (WSL2/Ubuntu). Nmap scans the local network every 5 minutes via cron and results are displayed in a live browser dashboard served by Apache and PHP.</p>
-          <span class="lang-tag">Bash</span>
-          <span class="lang-tag">PHP</span>
-          <span class="lang-tag">Apache</span>
-          <span class="lang-tag">Nmap</span>
-          <span class="lang-tag">Linux</span>
-          <div class="project-links">
-            <a href="https://github.com/elynfoo/web-scanner" class="btn-source" target="_blank">Source Code</a>
-            <a href="#" class="btn-workflow" onclick="document.getElementById('scanner-workflow-modal').classList.add('active'); return false;">Workflow</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- CODE SAMPLE -->
-  <section id="code">
-    <h2>Architecture</h2>
-    <p style="color:#555;margin-bottom:25px;font-size:15px;line-height:1.7;">
-      This portfolio site is deployed automatically to GitHub Pages via GitHub Actions on every push to <strong>main</strong>.
-    </p>
-
-    <!-- Workflow steps -->
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:30px;font-size:14px;">
-      <div style="background:#1a1a2e;color:white;padding:10px 16px;border-radius:6px;">git push main</div>
-      <div style="color:#28a745;font-size:20px;font-weight:bold;">&#8594;</div>
-      <div style="background:#1a1a2e;color:white;padding:10px 16px;border-radius:6px;">GitHub Actions triggered</div>
-      <div style="color:#28a745;font-size:20px;font-weight:bold;">&#8594;</div>
-      <div style="background:#1a1a2e;color:white;padding:10px 16px;border-radius:6px;">Checkout &#8594; Configure &#8594; Upload &#8594; Deploy</div>
-      <div style="color:#28a745;font-size:20px;font-weight:bold;">&#8594;</div>
-      <div style="background:#28a745;color:white;padding:10px 16px;border-radius:6px;">Live on GitHub Pages</div>
-    </div>
-
-    <!-- deploy.yml code block -->
-    <div class="code-block">
-<span class="comment"># .github/workflows/deploy.yml</span>
-<span class="keyword">name:</span> <span class="string">Deploy Portfolio to GitHub Pages</span>
-
-<span class="keyword">on:</span>
-  <span class="keyword">push:</span>
-    <span class="keyword">branches:</span>
-      - <span class="string">main</span>
-
-<span class="keyword">permissions:</span>
-  <span class="keyword">contents:</span> <span class="string">read</span>
-  <span class="keyword">pages:</span>    <span class="string">write</span>
-  <span class="keyword">id-token:</span> <span class="string">write</span>
-
-<span class="keyword">jobs:</span>
-  <span class="keyword">deploy:</span>
-    <span class="keyword">runs-on:</span> <span class="string">ubuntu-latest</span>
-    <span class="keyword">environment:</span>
-      <span class="keyword">name:</span> <span class="string">github-pages</span>
-      <span class="keyword">url:</span>  <span class="string">${{ steps.deployment.outputs.page_url }}</span>
-    <span class="keyword">steps:</span>
-      - <span class="keyword">name:</span> <span class="string">Checkout code</span>
-        <span class="keyword">uses:</span> <span class="string">actions/checkout@v4</span>
-
-      - <span class="keyword">name:</span> <span class="string">Setup Pages</span>
-        <span class="keyword">uses:</span> <span class="string">actions/configure-pages@v4</span>
-
-      - <span class="keyword">name:</span> <span class="string">Upload artifact</span>
-        <span class="keyword">uses:</span> <span class="string">actions/upload-pages-artifact@v3</span>
-        <span class="keyword">with:</span>
-          <span class="keyword">path:</span> <span class="string">'.'</span>
-
-      - <span class="keyword">name:</span> <span class="string">Deploy to GitHub Pages</span>
-        <span class="keyword">id:</span>   <span class="string">deployment</span>
-        <span class="keyword">uses:</span> <span class="string">actions/deploy-pages@v4</span>
-    </div>
-  </section>
-
-  <!-- FOOTER / ABOUT ME -->
-  <footer>
-    <p><strong style="color:white;">Elyn Foo</strong></p>
-    <p>GitHub: <a href="https://github.com/elynfoo" target="_blank">github.com/elynfoo</a></p>
-    <p>Contributors: Elyn Foo</p>
-    <p>Languages used: Python, HTML, CSS, YAML</p>
-    <p style="margin-top:15px;font-size:13px;">© 2026 Elyn Foo. Built with Flask & Deployed on Kubernetes.</p>
-  </footer>
-
-<!-- WORKFLOW MODAL -->
-<div class="modal-overlay" id="workflow-modal" onclick="if(event.target===this) this.classList.remove('active')">
-  <div class="modal">
-    <button class="close-btn" onclick="document.getElementById('workflow-modal').classList.remove('active')">✕</button>
-    <h3>Terraform + Ansible Workflow</h3>
-    <span class="step">1. Terraform</span>
-    <span>   Reads main.tf → provisions Azure VM</span>
-    <span>   (Resource Group, VNet, NSG, Public IP, NIC, VM)</span>
-    <span class="arrow">↓</span>
-    <span class="step">2. Ansible</span>
-    <span>   SSHs into VM using private key</span>
-    <span>   Installs Python, pip, Flask</span>
-    <span>   Creates app.py + systemd service</span>
-    <span>   Starts &amp; enables Flask on boot</span>
-    <span class="arrow">↓</span>
-    <span class="step">3. Flask App (on VM)</span>
-    <span>   Runs at http://&lt;VM-IP&gt;:5000</span>
-    <span>   Returns: Hello from Ansible + Terraform!</span>
-    <span class="arrow">↓</span>
-    <span class="step">4. Live Demo (containerized)</span>
-    <span>   Same app → Dockerfile → Docker Hub</span>
-    <span>   Deployed to AKS → http://40.90.189.161:5001</span>
+  <div class="scroll-cue">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
   </div>
+
 </div>
 
-<!-- SCANNER WORKFLOW MODAL -->
-<div class="modal-overlay" id="scanner-workflow-modal" onclick="if(event.target===this) this.classList.remove('active')">
-  <div class="modal">
-    <button class="close-btn" onclick="document.getElementById('scanner-workflow-modal').classList.remove('active')">&#x2715;</button>
-    <h3>Web Network Scanner Workflow</h3>
-    <span class="step">1. Cron Job (every 5 minutes)</span>
-    <span>   */5 * * * * /usr/local/bin/network_scan.sh</span>
-    <span>   Triggers the scan script automatically</span>
-    <span class="arrow">&#8595;</span>
-    <span class="step">2. network_scan.sh (Bash)</span>
-    <span>   Checks lock file → prevents overlapping runs</span>
-    <span>   Runs: nmap -sV --open &lt;network-range&gt;</span>
-    <span>   Writes results to /var/www/scans/output.txt</span>
-    <span class="arrow">&#8595;</span>
-    <span class="step">3. Apache2 + PHP</span>
-    <span>   Browser requests http://&lt;ip&gt;/network.php</span>
-    <span>   .htaccess enforces basic auth login</span>
-    <span>   PHP reads output.txt safely (outside web root)</span>
-    <span>   htmlspecialchars() prevents XSS</span>
-    <span class="arrow">&#8595;</span>
-    <span class="step">4. Browser Dashboard</span>
-    <span>   Displays live hosts, open ports, services</span>
-    <span>   Auto-refreshes every 60 seconds</span>
-    <span>   File permissions: 775 (no chmod 777)</span>
+
+<!-- ══════════════════════════════════════════════
+     1. PLAN
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="plan">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--dev-plan);">
+      <span class="num">1</span> Plan
+    </div>
+    <h2 class="stage-title">Why I Chose This Path</h2>
   </div>
-</div>
+
+  <p class="body-text">
+    Before I started my DevOps journey, I watched developers spend entire afternoons on
+    repetitive deployment tasks — copy-pasting commands, manually restarting servers,
+    hoping nothing broke. It felt like a solvable problem.
+  </p>
+  <p class="body-text">
+    I set out with a clear goal: understand every stage of the software delivery lifecycle
+    — not just the code, but how that code gets planned, built, tested, released, deployed,
+    operated, and monitored. This portfolio is the proof of that journey.
+  </p>
+  <p class="body-text">
+    Through an intensive bootcamp with <strong>Generation Singapore</strong> and
+    <strong>Temasek Polytechnic</strong>, I covered the full DevOps lifecycle in six months.
+  </p>
+
+  <div class="card-grid" style="margin-top:32px;">
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-plan);"></div>
+      <div class="icon">🎯</div>
+      <h3>The Problem I Set Out to Solve</h3>
+      <p>Manual deployments are fragile — one missed step breaks everything, usually at the worst moment.</p>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-plan);"></div>
+      <div class="icon">🗺️</div>
+      <h3>My Approach</h3>
+      <p>Automate early. If I do something twice manually, I build a pipeline for it. Reproducibility is reliability.</p>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-plan);"></div>
+      <div class="icon">💼</div>
+      <h3>What I Bring</h3>
+      <p>A junior engineer who understands the full delivery lifecycle — not just one tool, but how every stage connects.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     2. CODE
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="code">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--dev-code);">
+      <span class="num">2</span> Code
+    </div>
+    <h2 class="stage-title">What I Build With</h2>
+  </div>
+
+  <p class="stage-intro">
+    My primary stack is Python and Flask — backend-first, keeping things simple and focused
+    on what the user actually needs.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-code);"></div>
+      <h4>Flask E-Commerce App</h4>
+      <p>Product listings, cart management, checkout flow, and order confirmation. Clean MVC structure with SQLAlchemy ORM.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLAlchemy</span><span class="tag">PostgreSQL</span></div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-code);"></div>
+      <h4>Flask Comment Blog</h4>
+      <p>User authentication, comment posting, and role-based access control — admin vs. user permissions enforced server-side.</p>
+      <div class="tags"><span class="tag">Flask-Login</span><span class="tag">SQLite</span><span class="tag">RBAC</span></div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-code);"></div>
+      <h4>Portfolio App</h4>
+      <p>This very portfolio — originally a Flask app with login, dashboard, and multi-page routing. Migrated to a static site for GitHub Pages.</p>
+      <div class="tags"><span class="tag">Flask</span><span class="tag">Jinja2</span><span class="tag">GitHub Pages</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <p class="body-text"><strong>Core Languages & Frameworks</strong></p>
+    <div class="skill-list">
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">Flask</span>
+      <span class="skill-pill">SQLAlchemy</span>
+      <span class="skill-pill">Jinja2</span>
+      <span class="skill-pill">REST APIs</span>
+      <span class="skill-pill">PHP</span>
+      <span class="skill-pill">Bash</span>
+      <span class="skill-pill">Git</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     3. BUILD
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="build">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--dev-build);">
+      <span class="num">3</span> Build
+    </div>
+    <h2 class="stage-title">Containerising the Application</h2>
+  </div>
+
+  <p class="stage-intro">
+    Every app I build gets containerised with Docker — ensuring it runs identically in
+    development, testing, and production.
+  </p>
+
+  <div class="story-card">
+    <div class="side-bar" style="background:var(--dev-build);"></div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">The Problem</p>
+      <p>"Works on my machine" is not a deployment strategy. Without containers, environment drift between dev and production caused silent failures that were hard to diagnose.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">What I Built</p>
+      <p>Dockerfiles for each Flask application, multi-container setups with Docker Compose for local development, and image publishing to Docker Hub as part of the CI pipeline.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">Impact</p>
+      <p>Any team member can pull the image and run an identical environment in seconds. No setup docs, no version mismatches, no surprises.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Docker</span><span class="tag">Dockerfile</span>
+      <span class="tag">Docker Compose</span><span class="tag">Docker Hub</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     4. TEST
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="test">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--dev-test);">
+      <span class="num">4</span> Test
+    </div>
+    <h2 class="stage-title">Validating Before it Ships</h2>
+  </div>
+
+  <p class="stage-intro">
+    Testing isn't just running code — it's verifying the whole system: does the container
+    start? Does the route respond? Does the database migrate cleanly?
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-test);"></div>
+      <div class="icon">🐳</div>
+      <h3>Container Smoke Tests</h3>
+      <p>After each Docker build, I verify the container starts successfully, the app port is reachable, and the health endpoint responds before pushing the image.</p>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-test);"></div>
+      <div class="icon">🔐</div>
+      <h3>Auth & Access Testing</h3>
+      <p>For the Flask blog, I manually tested all role-based access paths — ensuring admin-only routes truly blocked regular users and that session handling was secure.</p>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--dev-test);"></div>
+      <div class="icon">🗄️</div>
+      <h3>Database Migration Testing</h3>
+      <p>Migrated the e-commerce app from SQLite to PostgreSQL — testing that all queries, constraints, and relationships survived the switch without data loss.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     5. RELEASE  (CI/CD — Featured Project)
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="release">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--ops-release);">
+      <span class="num">5</span> Release
+    </div>
+    <h2 class="stage-title">Zero-Touch Deployment Pipeline</h2>
+  </div>
+
+  <p class="stage-intro">
+    The moment a commit is pushed, the pipeline takes over — no manual steps, no SSH,
+    no "remember to restart the service."
+  </p>
+
+  <div class="story-card">
+    <div class="side-bar" style="background:var(--ops-release);"></div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">⭐ Featured Project: Containerised Flask Portfolio Pipeline</p>
+      <p>Built a full CI/CD pipeline in Azure DevOps that handles the complete release lifecycle automatically.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">The Challenge</p>
+      <p>Configuring pipeline triggers, securely injecting Docker Hub credentials as pipeline variables, and ensuring the build only proceeds when the image was successfully pushed — all without hardcoding any secrets.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">The Pipeline</p>
+      <p>
+        Commit to Azure Repos → Azure DevOps trigger fires → Docker image built →
+        Image pushed to Docker Hub → Kubernetes manifest applied → App live.
+        15 manual steps reduced to zero.
+      </p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">Impact</p>
+      <p>Full audit trail, consistent builds, and zero deployment anxiety. This mirrors exactly how production DevOps teams operate.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Azure DevOps</span><span class="tag">CI/CD Pipelines</span>
+      <span class="tag">Azure Repos</span><span class="tag">Pipeline Variables</span>
+      <span class="tag">Docker Hub</span><span class="tag">GitHub Actions</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     6. DEPLOY
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="deploy">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--ops-deploy);">
+      <span class="num">6</span> Deploy
+    </div>
+    <h2 class="stage-title">Getting it Running in the Cluster</h2>
+  </div>
+
+  <p class="stage-intro">
+    Deployment is where the container meets the cluster. I work with Kubernetes to
+    manage how applications run, scale, and recover.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent" style="background:var(--ops-deploy);"></div>
+      <div class="icon">☸️</div>
+      <h3>Kubernetes on Minikube</h3>
+      <p>Wrote and applied Kubernetes manifests (Deployments, Services, ConfigMaps) to deploy containerised Flask apps to a local Minikube cluster.</p>
+      <div class="tags"><span class="tag">Kubernetes</span><span class="tag">Minikube</span><span class="tag">kubectl</span><span class="tag">Manifests</span></div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:var(--ops-deploy);"></div>
+      <div class="icon">📄</div>
+      <h3>GitHub Actions → GitHub Pages</h3>
+      <p>This portfolio auto-deploys to GitHub Pages on every push to main via a GitHub Actions workflow — zero manual steps.</p>
+      <div class="tags"><span class="tag">GitHub Actions</span><span class="tag">GitHub Pages</span><span class="tag">YAML</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     7. OPERATE
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="operate">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--ops-operate);">
+      <span class="num">7</span> Operate
+    </div>
+    <h2 class="stage-title">Infrastructure as Code</h2>
+  </div>
+
+  <p class="stage-intro">
+    Infrastructure shouldn't be clicked into existence — it should be written, versioned,
+    and repeatable. That's the philosophy behind my Terraform and Ansible work.
+  </p>
+
+  <div class="story-card">
+    <div class="side-bar" style="background:var(--ops-operate);"></div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">⭐ Featured Project: Terraform + Ansible Azure VM Deployment</p>
+      <p>Provisioned an Azure Ubuntu VM from scratch and automatically configured it to run a Flask application — entirely through code.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">The Challenge</p>
+      <p>Chaining two tools with different responsibilities: Terraform for provisioning the VM (the "what exists") and Ansible for configuring it (the "what runs on it"). Getting the hand-off right — passing the VM's IP from Terraform output to Ansible's inventory — required careful orchestration.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">The Solution</p>
+      <p>Terraform creates the Azure VM and outputs its public IP. An Ansible playbook picks up that IP, installs Python and Flask, copies the app, and starts the service. Fully automated, fully repeatable — destroy and re-run in minutes.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#f39c12;">Impact</p>
+      <p>Any environment can be reproduced on demand. No snowflake servers, no undocumented manual steps — just code and a single command.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Terraform</span><span class="tag">Ansible</span>
+      <span class="tag">Azure</span><span class="tag">Linux</span>
+      <span class="tag">IaC</span><span class="tag">Playbooks</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     8. MONITOR  (Featured Project)
+══════════════════════════════════════════════ -->
+<section class="stage-section" id="monitor">
+  <div class="stage-header">
+    <div class="stage-badge" style="background:var(--ops-monitor);">
+      <span class="num">8</span> Monitor
+    </div>
+    <h2 class="stage-title">Seeing What's Actually Happening</h2>
+  </div>
+
+  <p class="stage-intro">
+    The pipeline isn't complete without visibility. You can't improve what you can't see.
+  </p>
+
+  <div class="story-card">
+    <div class="side-bar" style="background:var(--ops-monitor);"></div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">⭐ Featured Project: Web Network Scanner Dashboard</p>
+      <p>Built a browser-accessible network monitoring dashboard for Linux — turning raw Nmap output into a live, human-readable view of every active device on the network.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">The Problem</p>
+      <p>Network monitoring tools are either enterprise-priced or CLI-only. I wanted something lightweight that any team member could open in a browser — no install, no login.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">The Solution</p>
+      <p>A Bash script schedules Nmap scans, PHP parses and formats the output, and Apache serves the results as a live-refreshing dashboard. Open a browser on any device on the network and the data is right there.</p>
+    </div>
+    <div class="story-row">
+      <p class="story-row-label" style="color:#7b9ef5;">What I Learned</p>
+      <p>The best monitoring tools are the ones people actually open. Simplicity is a feature — not a shortcut. This project deepened my understanding of Linux process scheduling, web server configuration, and network fundamentals.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Linux</span><span class="tag">Nmap</span>
+      <span class="tag">Apache</span><span class="tag">PHP</span>
+      <span class="tag">Bash</span><span class="tag">Network Monitoring</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CLOSING — Strong Conclusion
+══════════════════════════════════════════════ -->
+<section class="stage-section" style="border-bottom:none;">
+  <div class="closing-box">
+    <div style="font-size:2rem; margin-bottom:16px;">∞</div>
+    <blockquote>"The best deployment is the one nobody notices."</blockquote>
+    <p class="lesson">
+      I've worked through every stage — from planning what to build, to watching it
+      run in production. What I want now is to do it inside a real team, on real systems,
+      with real stakes. If that sounds like where you're heading, I'd love to be part of it.
+    </p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="mailto:elynf@genstudents.org" class="btn btn-green">Let's Talk</a>
+      <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Find me online</p>
+    <div class="presence-row">
+      <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143" target="_blank" class="presence-link">🔗 LinkedIn</a>
+      <a href="https://github.com/elynfoo" target="_blank" class="presence-link">💻 GitHub</a>
+      <a href="https://hub.docker.com/u/elynfoo" target="_blank" class="presence-link">🐳 Docker Hub</a>
+      <a href="mailto:elynf@genstudents.org" class="presence-link">✉️ Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elyn Foo · Junior Cloud &amp; DevOps Engineer · Singapore</p>
+  <p style="margin-top:6px;">
+    <a href="https://github.com/elynfoo" target="_blank">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/yi-ling-foo-659b2a143" target="_blank">LinkedIn</a>
+  </p>
+</footer>
 
 </body>
 </html>
