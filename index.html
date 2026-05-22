@@ -104,7 +104,42 @@
       max-width: 600px;
       margin-bottom: 36px;
     }
-    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    /* ── STAGE ROW ── */
+    .stage-row {
+      display: flex;
+      align-items: center;
+      margin-top: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 24px;
+    }
+    .stage-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 0 18px;
+    }
+    .stage-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .stage-name {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .stage-sep {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
     .btn {
       padding: 11px 26px;
       border-radius: 6px;
@@ -338,9 +373,16 @@
       building the answer: automated pipelines, containerised apps, and infrastructure as code.
       Scroll down to see how I work.
     </p>
-    <div class="hero-cta">
-      <a href="#plan" class="btn btn-green">See My Work</a>
-      <a href="mailto:elynf@genstudents.org" class="btn btn-ghost">Get in Touch</a>
+    <div class="stage-row">
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-plan)"></span><span class="stage-name">Plan</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-code)"></span><span class="stage-name">Code</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-build)"></span><span class="stage-name">Build</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--dev-test)"></span><span class="stage-name">Test</span></div>
+      <div class="stage-sep"></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-release)"></span><span class="stage-name">Release</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-deploy)"></span><span class="stage-name">Deploy</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-operate)"></span><span class="stage-name">Operate</span></div>
+      <div class="stage-item"><span class="stage-dot" style="background:var(--ops-monitor)"></span><span class="stage-name">Monitor</span></div>
     </div>
 
   </div>
