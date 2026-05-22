@@ -241,6 +241,15 @@
     .card h4 { color: var(--text); font-size: 0.92rem; margin-bottom: 6px; }
     .card p  { color: var(--muted); font-size: 0.875rem; margin-bottom: 0; }
     .card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .card-links { display: flex; gap: 12px; margin-top: 14px; }
+    .card-link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card-link:hover { color: var(--accent); }
 
     /* ── STORY CARD (featured) ── */
     .story-card {
@@ -472,18 +481,29 @@
       <h4>Flask E-Commerce App</h4>
       <p>Product listings, cart management, checkout flow, and order confirmation. Clean MVC structure with SQLAlchemy ORM.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLAlchemy</span><span class="tag">PostgreSQL</span></div>
+      <div class="card-links">
+        <a href="https://github.com/elynfoo/supplement-bridge.github.io" target="_blank" class="card-link">↗ GitHub</a>
+        <a href="https://supplement-bridge.github.io" target="_blank" class="card-link">⬡ Demo</a>
+      </div>
     </div>
     <div class="card">
       <div class="card-accent" style="background:var(--dev-code);"></div>
       <h4>Flask Comment Blog</h4>
       <p>User authentication, comment posting, and role-based access control — admin vs. user permissions enforced server-side.</p>
       <div class="tags"><span class="tag">Flask-Login</span><span class="tag">SQLite</span><span class="tag">RBAC</span></div>
+      <div class="card-links">
+        <a href="https://github.com/elynfoo" target="_blank" class="card-link">↗ GitHub</a>
+      </div>
     </div>
     <div class="card">
       <div class="card-accent" style="background:var(--dev-code);"></div>
       <h4>Portfolio App</h4>
       <p>This very portfolio — originally a Flask app with login, dashboard, and multi-page routing. Migrated to a static site for GitHub Pages.</p>
       <div class="tags"><span class="tag">Flask</span><span class="tag">Jinja2</span><span class="tag">GitHub Pages</span></div>
+      <div class="card-links">
+        <a href="https://github.com/elynfoo/devops" target="_blank" class="card-link">↗ GitHub</a>
+        <a href="https://elynfoo.github.io" target="_blank" class="card-link">⬡ Demo</a>
+      </div>
     </div>
   </div>
 
